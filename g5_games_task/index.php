@@ -50,11 +50,19 @@ class App{
 			$result->addError(new \Error($this->locale->get('input_error_start_isnt_eq_required_chars_count', [$this->config->input_number_chars_count])));
 		}
 		$this->start_range = $get_start_range;
+		
+		if(intval($this->start_range)<1)
+			$result->addError(new \Error($this->locale->get('input_error_start_cant_be_less_one', [str_pad('1', $this->config->input_number_chars_count, "0", STR_PAD_LEFT)])));
+		
 		$get_end_range = preg_replace("/[^0-9]/", '', $_GET['end']);
 		if(strlen($get_end_range)!=$this->config->input_number_chars_count){
 			$result->addError(new \Error($this->locale->get('input_error_end_isnt_eq_required_chars_count', [$this->config->input_number_chars_count])));
 		}
 		$this->end_range = $get_end_range;
+		
+		if(intval($this->start_range)>intval($this->end_range))
+			$result->addError(new \Error($this->locale->get('input_error_start_greate_then_end')));
+		
 		$result->setSuccess(!$result->hasError());
 		return $result;
 	}
@@ -65,8 +73,19 @@ class App{
 	*/
 	private function calcLuckieNumbersCount():\Result{
 		$time_start = microtime(true);
-		$number = intval($this->start_range);
+		$number = intval($this->start_range);		
 		$end = intval($this->end_range);
+		$half_chars_count = $this->config->input_number_chars_count/2;
+		
+		//Economy a littel time
+		if(strlen($number)<=$half_chars_count){
+			if(strlen($end)<=$half_chars_count){
+				$number = $end++;
+			}else{
+				$number = str_pad('1', $half_chars_count+1, '0');
+			}
+		}
+		
 		$counter = 0;
 		for($number; $number<=$end; $number++){
 			if($this->isLuckie($number))
@@ -111,7 +130,7 @@ class App{
 			echo $this->locale->get('result_success_message', [$this->start_range, $this->end_range, round($result->getData()['time'], 4), $result->getData()['counter'],]);
 		}else{
 			foreach($result->getErrors() as $error)
-				echo $error->getMessage().'</br>';
+				echo $this->locale->get('input_error', [$error->getMessage()]).'</br>';
 		}
 	}
 }

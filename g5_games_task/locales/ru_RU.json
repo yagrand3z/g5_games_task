@@ -1,0 +1,8 @@
+{
+	"result_success_message":"В диапазоне от %s до %s за %s сек. насчитано счастливых билетиков ровно %s",
+	"input_error":"Ошибка: %s",
+	"input_error_start_cant_be_less_one":"Параметр \"start\" не может быть меньше %s номера",
+	"input_error_start_isnt_eq_required_chars_count":"Параметр \"start\" должен содержать %s цифр",
+	"input_error_end_isnt_eq_required_chars_count":"Параметр \"end\" должен содержать %s цифр",
+	"input_error_start_greate_then_end":"Параметр \"start\" не должен быть больше параметра \"end\""
+}

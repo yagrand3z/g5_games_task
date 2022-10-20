@@ -1,5 +1,0 @@
-{
-	"result_success_message":"В диапазоне от %s до %s за %s сек. насчитано счастливых билетиков ровно %s",
-	"input_error_start_isnt_eq_required_chars_count":"Параметр \"start\" должен содержать %s цифр",
-	"input_error_end_isnt_eq_required_chars_count":"Параметр \"end\" должен содержать %s цифр"
-}
