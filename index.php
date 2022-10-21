@@ -77,7 +77,8 @@ class App{
 		$end = intval($this->end_range);
 		$half_chars_count = $this->config->input_number_chars_count/2;
 		
-		//Economy a littel time
+		//Economy a littel time by excluding numbers between 000001 and 001000 
+		//or some like it, if has been setted another 'input_number_chars_count' different than 6
 		if(strlen($number)<=$half_chars_count){
 			if(strlen($end)<=$half_chars_count){
 				$number = $end++;
