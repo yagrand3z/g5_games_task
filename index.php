@@ -145,7 +145,7 @@ class Config {
 	private $config = [
 				'input_number_chars_count' => 6, //Must be even or will throw exception
 				'locale_code' => 'ru_RU', //Interface strings in code is bad practice all times
-				'base_locale_path' => '/g5_games_task/locales'
+				'base_locale_path' => '/locales'
 			];
 	
 	function __construct(){
